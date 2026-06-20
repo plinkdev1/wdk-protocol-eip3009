@@ -41,6 +41,12 @@ USDt, USDC, EURC and most modern stablecoins implement EIP-3009.
 - 🧱 **Pure helpers** (`buildDomain`, `hashAuthorization`, `recoverAuthorizationSigner`, `encode*`) for back-ends/relayers that don't hold a wallet.
 - 🏃 **Node + Bare** runtime support, complete JSDoc/TypeScript types, `standard` style, `brittle` tests.
 
+## 🎬 Demo
+
+<img src="./media/demo-terminal.png" alt="wdk-protocol-eip3009 demo: gasless transfer example + brittle tests" width="620" />
+
+Reproduce it yourself — `npm run example` runs the gasless flow (holder signs → relayer verifies & builds the on-chain `transferWithAuthorization`), and `npm test` runs the brittle suite. See [`docs`](#-api-reference) below.
+
 ## ⬇️ Installation
 
 ```bash
