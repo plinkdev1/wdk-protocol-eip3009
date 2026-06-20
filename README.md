@@ -198,6 +198,14 @@ The test suite (`brittle`) covers the pure EIP-712 helpers (domain/types/nonce/h
 
 Issues and PRs welcome. Please run `npm run lint && npm test` before submitting. Source is JavaScript with JSDoc; type declarations are generated, not hand-edited.
 
+## 🗺️ Roadmap
+
+📍 **Full phased roadmap: [`ROADMAP.md`](./ROADMAP.md).** It shows what ships today
+(gasless TransferWithAuthorization / ReceiveWithAuthorization / CancelAuthorization,
+Bare runtime) and sequences ERC-2612 permit support, batch authorizations, fee
+quoting, a reference relayer service, and alignment with the sibling
+`@tetherto/wdk-protocol-*` family (swap, lending, bridge, fiat).
+
 ## 🆘 Support
 
 - WDK documentation: <https://docs.wallet.tether.io>
