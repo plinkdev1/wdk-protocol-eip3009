@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Generated type declarations (built by `npm run build:types`, shipped on publish)
+types/
+
+# Generated brittle test aggregator (built by `npm run make:test`)
+test/all.mjs
+
+# Logs & OS
+*.log
+.DS_Store
+coverage/

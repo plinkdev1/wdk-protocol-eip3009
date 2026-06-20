@@ -1,0 +1,92 @@
+{
+  "name": "wdk-protocol-eip3009",
+  "version": "1.0.0",
+  "description": "A WDK protocol module that lets @tetherto/wdk-wallet-evm accounts create and submit EIP-3009 (transferWithAuthorization) gasless, signature-based stablecoin transfers — for USDt, USDC and any EIP-3009 token.",
+  "keywords": [
+    "wdk",
+    "protocol",
+    "eip-3009",
+    "eip3009",
+    "transferWithAuthorization",
+    "receiveWithAuthorization",
+    "gasless",
+    "meta-transaction",
+    "usdt",
+    "usdc",
+    "stablecoin",
+    "ethereum",
+    "evm",
+    "bare"
+  ],
+  "author": "wdk-protocol-eip3009 contributors",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plinkdev1/wdk-protocol-eip3009.git"
+  },
+  "type": "module",
+  "main": "index.js",
+  "types": "./types",
+  "files": [
+    "index.js",
+    "bare.js",
+    "src",
+    "types",
+    "README.md",
+    "LICENSE",
+    "AGENTS.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "bare": "./bare.js",
+      "default": "./index.js"
+    },
+    "./package": {
+      "default": "./package.json"
+    }
+  },
+  "scripts": {
+    "build:types": "tsc",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "make:test": "brittle-make-test test/all.mjs test/*.test.js",
+    "pretest": "npm run make:test",
+    "test": "brittle-node test/all.mjs",
+    "pretest:bare": "npm run make:test",
+    "test:bare": "brittle-bare test/all.mjs",
+    "example": "node examples/gasless-transfer.mjs",
+    "prepublishOnly": "npm run lint && npm test && npm run build:types"
+  },
+  "dependencies": {
+    "bare-node-runtime": "^1.1.4",
+    "ethers": "^6.14.3"
+  },
+  "peerDependencies": {
+    "@tetherto/wdk-wallet-evm": ">=1.0.0-beta.8"
+  },
+  "peerDependenciesMeta": {
+    "@tetherto/wdk-wallet-evm": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "brittle": "^4.0.2",
+    "standard": "^17.1.2",
+    "typescript": "^5.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "standard": {
+    "ignore": [
+      "bare.js",
+      "types/**/*.js",
+      "examples/**/*.js"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
