@@ -38,7 +38,12 @@ This module already powers the gasless path of the
    `recoverPermitSigner` (+ `encodePermit` and `encodeNoncesCall` for relayer
    submission and reading the sequential `nonces(owner)`). Brittle-tested incl. a
    real-Wallet sign→recover round-trip and cross-impl hash agreement.
-2. **Batch authorizations** — sign N transfers in one UX, submit independently.
+2. ✅ **Batch authorizations** — done. `src/batch.js`:
+   `buildAuthorizationBatch` (N messages, fresh + de-duplicated random nonces),
+   `authorizationBatchToTypedData` (per-item EIP-712 payloads to sign), and
+   `encodeAuthorizationBatch` (signed set → calldata). Independent nonces mean a
+   relayer submits them in any order / in parallel. Brittle-tested incl. a full
+   build→sign→recover→encode round-trip.
 3. **Gas/fee quoting** — estimate the relayer's reimbursement (in token terms)
    so the UI can show the user the net amount before signing.
 

@@ -65,6 +65,14 @@ export {
   encodeNoncesCall
 } from './src/permit.js'
 
+// Batch authorizations — sign N EIP-3009 transfers in one UX, submit independently
+// (each has its own random nonce, so order doesn't matter).
+export {
+  buildAuthorizationBatch,
+  authorizationBatchToTypedData,
+  encodeAuthorizationBatch
+} from './src/batch.js'
+
 // x402 — HTTP "402 Payment Required" payments on top of EIP-3009. The "exact"
 // scheme is a signed transferWithAuthorization, so the wallet signs and a
 // facilitator settles. These helpers build/encode/decode the wire format and
