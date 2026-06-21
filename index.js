@@ -49,6 +49,22 @@ export {
 
 export { ERC20_EIP3009_ABI } from './src/erc20-eip3009-abi.js'
 
+// ERC-2612 `permit` — the gasless-approval sibling of EIP-3009, behind the same
+// module surface (same EIP-712 domain). For tokens that expose `permit` instead
+// of `transferWithAuthorization`.
+export {
+  PERMIT,
+  ERC2612_PERMIT_ABI,
+  getPermitTypes,
+  getPermitInterface,
+  buildPermitMessage,
+  buildPermitTypedData,
+  hashPermit,
+  recoverPermitSigner,
+  encodePermit,
+  encodeNoncesCall
+} from './src/permit.js'
+
 // x402 — HTTP "402 Payment Required" payments on top of EIP-3009. The "exact"
 // scheme is a signed transferWithAuthorization, so the wallet signs and a
 // facilitator settles. These helpers build/encode/decode the wire format and

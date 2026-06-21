@@ -32,8 +32,12 @@ This module already powers the gasless path of the
 
 ## ⏳ Phase 2 — Permit & meta-transaction breadth
 
-1. **ERC-2612 `permit`** — gasless approvals for tokens that implement permit
-   rather than EIP-3009, behind the same module surface.
+1. ✅ **ERC-2612 `permit`** — done. `src/permit.js` ships the permit sibling of
+   the EIP-3009 builders behind the same module surface (same EIP-712 domain):
+   `buildPermitMessage` / `buildPermitTypedData` / `hashPermit` /
+   `recoverPermitSigner` (+ `encodePermit` and `encodeNoncesCall` for relayer
+   submission and reading the sequential `nonces(owner)`). Brittle-tested incl. a
+   real-Wallet sign→recover round-trip and cross-impl hash agreement.
 2. **Batch authorizations** — sign N transfers in one UX, submit independently.
 3. **Gas/fee quoting** — estimate the relayer's reimbursement (in token terms)
    so the UI can show the user the net amount before signing.
