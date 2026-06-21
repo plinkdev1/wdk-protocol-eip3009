@@ -77,6 +77,11 @@ export {
 // the user the net amount before signing. Prices are caller-supplied (any oracle).
 export { quoteRelayerFee } from './src/fee.js'
 
+// Reference relayer — the server half of the gasless path: verify a signed
+// authorization and submit it on-chain (the broadcast is injected). The runnable
+// HTTP service is examples/relayer-server.mjs.
+export { relayAuthorization } from './src/relayer.js'
+
 // x402 — HTTP "402 Payment Required" payments on top of EIP-3009. The "exact"
 // scheme is a signed transferWithAuthorization, so the wallet signs and a
 // facilitator settles. These helpers build/encode/decode the wire format and

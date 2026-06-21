@@ -51,12 +51,16 @@ This module already powers the gasless path of the
 
 **Phase 2 complete** — permit + batch + fee quoting all shipped.
 
-## ⏳ Phase 3 — Reference relayer service
+## ✅ Phase 3 — Reference relayer service (shipped)
 
-4. A small, deployable **reference relayer** (the counterpart to this client-side
-   module): accepts signed authorizations, validates them with the pure helpers
-   here, submits on-chain, and meters reimbursement. Ships as an example so
-   integrators have an end-to-end gasless path, not just the signing half.
+4. ✅ **Reference relayer** — done. `relayAuthorization` (exported, unit-tested)
+   is the pure verify-and-submit core: recover the signer, confirm it matches
+   `message.from`, check the validity window, encode, and delegate the broadcast
+   to an injected submitter. `examples/relayer-server.mjs` is the runnable,
+   dependency-free HTTP service (`POST /relay`) that wires an ethers submitter
+   (`RPC_URL` + `RELAYER_PRIVATE_KEY`) around it — an end-to-end gasless path, not
+   just the signing half. Reimbursement metering pairs with `quoteRelayerFee`
+   (left to the integrator's policy).
 
 ## ⏳ Phase 4 — Protocol-family alignment
 
