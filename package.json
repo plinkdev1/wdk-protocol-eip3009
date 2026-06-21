@@ -24,6 +24,10 @@
     "type": "git",
     "url": "git+https://github.com/plinkdev1/wdk-protocol-eip3009.git"
   },
+  "homepage": "https://github.com/plinkdev1/wdk-protocol-eip3009#readme",
+  "bugs": {
+    "url": "https://github.com/plinkdev1/wdk-protocol-eip3009/issues"
+  },
   "type": "module",
   "main": "index.js",
   "types": "./types",
