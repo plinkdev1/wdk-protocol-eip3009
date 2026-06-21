@@ -73,6 +73,10 @@ export {
   encodeAuthorizationBatch
 } from './src/batch.js'
 
+// Relayer fee quoting — reimbursement in the transferred token, so a UI can show
+// the user the net amount before signing. Prices are caller-supplied (any oracle).
+export { quoteRelayerFee } from './src/fee.js'
+
 // x402 — HTTP "402 Payment Required" payments on top of EIP-3009. The "exact"
 // scheme is a signed transferWithAuthorization, so the wallet signs and a
 // facilitator settles. These helpers build/encode/decode the wire format and

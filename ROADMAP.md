@@ -44,8 +44,12 @@ This module already powers the gasless path of the
    `encodeAuthorizationBatch` (signed set → calldata). Independent nonces mean a
    relayer submits them in any order / in parallel. Brittle-tested incl. a full
    build→sign→recover→encode round-trip.
-3. **Gas/fee quoting** — estimate the relayer's reimbursement (in token terms)
-   so the UI can show the user the net amount before signing.
+3. ✅ **Gas/fee quoting** — done. `src/fee.js` `quoteRelayerFee({ gasUnits,
+   gasPriceWei, nativeUsdPrice, tokenUsdPrice, tokenDecimals, marginBps })`
+   returns the relayer's reimbursement in the transferred token's base units
+   (exact BigInt; USD prices are caller-supplied — any oracle). Brittle-tested.
+
+**Phase 2 complete** — permit + batch + fee quoting all shipped.
 
 ## ⏳ Phase 3 — Reference relayer service
 
