@@ -48,3 +48,21 @@ export {
 } from './src/eip3009.js'
 
 export { ERC20_EIP3009_ABI } from './src/erc20-eip3009-abi.js'
+
+// x402 — HTTP "402 Payment Required" payments on top of EIP-3009. The "exact"
+// scheme is a signed transferWithAuthorization, so the wallet signs and a
+// facilitator settles. These helpers build/encode/decode the wire format and
+// verify a payment against requirements.
+export {
+  X402_VERSION,
+  SCHEME_EXACT,
+  NETWORK_CHAIN_IDS,
+  networkToChainId,
+  buildPaymentRequirements,
+  buildPaymentRequiredResponse,
+  authorizationForRequirements,
+  buildExactPayment,
+  encodePaymentHeader,
+  decodePaymentHeader,
+  verifyExactPayment
+} from './src/x402.js'
