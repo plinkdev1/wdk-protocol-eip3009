@@ -9,6 +9,12 @@
 
 ## ✅ Phase 1 — Gasless EIP-3009 transfers (SHIPPED)
 
+- ✅ **x402 (HTTP 402 payments)** — this package is the settlement primitive for
+  the x402 "exact" scheme (a signed `transferWithAuthorization`). Ships
+  `buildPaymentRequirements`, `authorizationForRequirements`, `buildExactPayment`,
+  `encode/decodePaymentHeader`, and `verifyExactPayment` (see the README). Powers
+  the wallet x402 client and the wdk-checkout facilitator. 27/27 tests pass.
+
 Follows the official `@tetherto/wdk-protocol-*` conventions exactly (JS + JSDoc,
 `index.js` + `bare.js` Bare-runtime entry points, `standard` lint, Apache-2.0).
 

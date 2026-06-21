@@ -39,7 +39,40 @@ USDt, USDC, EURC and most modern stablecoins implement EIP-3009.
 - 🧭 **Auto-resolve** the EIP-712 domain from the token on-chain (EIP-5267 `eip712Domain()` with `name()`/`version()` fallback), or pass it inline to skip the round-trip.
 - 🔎 **Query** on-chain `authorizationState(authorizer, nonce)` to detect used/cancelled nonces.
 - 🧱 **Pure helpers** (`buildDomain`, `hashAuthorization`, `recoverAuthorizationSigner`, `encode*`) for back-ends/relayers that don't hold a wallet.
+- 🌐 **x402 built in** — the settlement primitive for HTTP "402 Payment Required" (see below).
 - 🏃 **Node + Bare** runtime support, complete JSDoc/TypeScript types, `standard` style, `brittle` tests.
+
+## 🌐 x402 — HTTP "402 Payment Required" payments
+
+x402 (the open per-request payment protocol for APIs and AI agents) uses, as its
+canonical EVM scheme (`exact`), **a signed EIP-3009 `transferWithAuthorization`** —
+so this package *is* the x402 settlement primitive. The wallet signs an
+authorization; a facilitator verifies it (off-chain) and settles it on-chain.
+
+Helpers (exported from the package root):
+
+| Function | Role |
+|---|---|
+| `buildPaymentRequirements` / `buildPaymentRequiredResponse` | **Server** — the 402 challenge (the `accepts` array; the asset's EIP-712 name/version go in `extra`). |
+| `authorizationForRequirements` + `buildExactPayment` | **Client** — build + pack the payment from a signed authorization (uint256 fields as strings on the wire). |
+| `encodePaymentHeader` / `decodePaymentHeader` | The base64 **`X-PAYMENT`** wire format (Node/Bare/browser-safe). |
+| `verifyExactPayment` | **Facilitator** — recover the signer + check scheme/network/recipient/amount/validity. Settlement is a normal `submitTransferAuthorization()`. |
+| `networkToChainId` | Map x402 network names → EVM chain ids. |
+
+```js
+import {
+  buildPaymentRequirements, authorizationForRequirements, buildExactPayment,
+  encodePaymentHeader, decodePaymentHeader, verifyExactPayment
+} from '@tetherto/wdk-protocol-eip3009'
+
+// Server issues requirements; client signs `authorizationForRequirements(...)`,
+// packs `buildExactPayment(...)`, sends `encodePaymentHeader(payment)` as X-PAYMENT;
+// facilitator runs `verifyExactPayment(decodePaymentHeader(header), requirements)`.
+```
+
+This powers the WDK wallet's x402 payer client (extension/template) and the
+[`wdk-checkout`](https://github.com/plinkdev1/wdk-checkout-and-woocommerce-plugin)
+facilitator + Cloudflare/Express middleware that charge bots and crawlers.
 
 ## 🎬 Demo
 
