@@ -1,5 +1,5 @@
 {
-  "name": "wdk-protocol-eip3009",
+  "name": "@wdk-starter/wdk-protocol-eip3009",
   "version": "1.0.0",
   "description": "A WDK protocol module that lets @tetherto/wdk-wallet-evm accounts create and submit EIP-3009 (transferWithAuthorization) gasless, signature-based stablecoin transfers — for USDt, USDC and any EIP-3009 token.",
   "keywords": [

@@ -71,7 +71,7 @@ import {
 ```
 
 This powers the WDK wallet's x402 payer client (extension/template) and the
-[`wdk-checkout`](https://github.com/plinkdev1/wdk-checkout-and-woocommerce-plugin)
+[`@wdk-starter/wdk-checkout`](https://github.com/plinkdev1/wdk-checkout-and-woocommerce-plugin)
 facilitator + Cloudflare/Express middleware that charge bots and crawlers.
 
 ## 🎬 Demo
@@ -83,7 +83,7 @@ Reproduce it yourself — `npm run example` runs the gasless flow (holder signs 
 ## ⬇️ Installation
 
 ```bash
-npm install wdk-protocol-eip3009 @tetherto/wdk-wallet-evm
+npm install @wdk-starter/wdk-protocol-eip3009 @tetherto/wdk-wallet-evm
 ```
 
 `ethers` v6 is a dependency; `@tetherto/wdk-wallet-evm` is an optional peer (any account exposing `getAddress`, `signTypedData`, and `sendTransaction` works).
@@ -93,7 +93,7 @@ npm install wdk-protocol-eip3009 @tetherto/wdk-wallet-evm
 ### Sign a gasless transfer (the customer)
 
 ```js
-import Eip3009ProtocolEvm from 'wdk-protocol-eip3009'
+import Eip3009ProtocolEvm from '@wdk-starter/wdk-protocol-eip3009'
 
 // `account` is a @tetherto/wdk-wallet-evm WalletAccountEvm
 const eip3009 = new Eip3009ProtocolEvm(account)
@@ -199,7 +199,7 @@ Any ERC-20 that implements EIP-3009 on any EVM chain — including **USDt**, **U
 
 | Runtime | Entry | Notes |
 |---|---|---|
-| Node.js (≥ 20) | `index.js` | `import 'wdk-protocol-eip3009'` |
+| Node.js (≥ 20) | `index.js` | `import '@wdk-starter/wdk-protocol-eip3009'` |
 | Bare | `bare.js` | Resolved via the `bare` export condition + `bare-node-runtime` |
 
 ## 🔒 Security considerations
