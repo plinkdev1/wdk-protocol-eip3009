@@ -1,0 +1,39 @@
+# Publishes @wdk-starter/wdk-protocol-eip3009 to npm.
+#
+# ── One-time setup (because your npm account has 2FA) ───────────────────────
+# Git pushes/PRs do NOT publish to npm — only this workflow does, on a Release.
+# 2FA blocks interactive publishes, so CI uses an *automation token* instead:
+#   1. npmjs.com → your avatar → Access Tokens → Generate New Token →
+#      "Automation" (this token type bypasses the 2FA OTP prompt).
+#   2. GitHub repo → Settings → Secrets and variables → Actions →
+#      New repository secret → name: NPM_TOKEN, value: <the token>.
+#   3. If the @wdk-starter org enforces 2FA, set it to
+#      "Require two-factor authentication or automation tokens"
+#      (npmjs.com → org → Settings → Members → 2FA), else automation tokens
+#      are rejected.
+#
+# ── Releasing ───────────────────────────────────────────────────────────────
+# Bump "version" in package.json, commit, then create a GitHub Release (or run
+# this workflow manually via "Run workflow"). npm rejects re-publishing an
+# existing version, so always bump first.
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - run: npm install
+      # prepublishOnly runs lint + tests + type build before the package is sent.
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
