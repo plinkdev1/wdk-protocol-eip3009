@@ -1,6 +1,13 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./brand/eip3009-lockup-ondark.png" />
+  <img src="./brand/eip3009-lockup-onlight.png" alt="WDK · EIP-3009" width="360" />
+</picture>
+
 # wdk-protocol-eip3009
+
+_A **WDK Protocol Module** — part of the [WDK](https://docs.wallet.tether.io) ecosystem._
 
 **Gasless, signature-based stablecoin transfers for the [Tether Wallet Development Kit](https://docs.wallet.tether.io).**
 
