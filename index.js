@@ -99,3 +99,14 @@ export {
   decodePaymentHeader,
   verifyExactPayment
 } from './src/x402.js'
+
+// Protocol-family alignment — compose EIP-3009 as the gasless settlement leg of
+// the sibling wdk-protocol-* flows (swap / lending / bridge / fiat). Narrow
+// interfaces only; imports no SDK. Read the USDt obligation out of a protocol
+// action, build the authorization to sign, and hand it to relayAuthorization.
+export {
+  toSettlementLeg,
+  buildGaslessSettlement,
+  composeSettlementPlan,
+  settlementToRelayRequest
+} from './src/compose.js'

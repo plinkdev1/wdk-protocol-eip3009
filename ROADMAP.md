@@ -62,12 +62,24 @@ This module already powers the gasless path of the
    just the signing half. Reimbursement metering pairs with `quoteRelayerFee`
    (left to the integrator's policy).
 
-## ⏳ Phase 4 — Protocol-family alignment
+## ✅ Phase 4 — Protocol-family alignment (shipped)
 
-5. Align with the sibling `@tetherto/wdk-protocol-*` modules so a wallet can
-   compose them: **swap** (`-swap-velora-evm`), **lending** (`-lending-aave-evm`),
-   **bridge** (`-bridge-usdt0-evm`), **fiat** (`-fiat-moonpay`). EIP-3009 becomes
-   the gasless settlement leg those flows can opt into.
+5. ✅ **Protocol-family alignment** — done (the composition **seam**, not the
+   protocols). The new `src/compose.js` lets a wallet make EIP-3009 the **gasless
+   settlement leg** of the sibling `@tetherto/wdk-protocol-*` flows — **swap**
+   (`-swap-velora-evm`), **lending** (`-lending-aave-evm`), **bridge**
+   (`-bridge-usdt0-evm`), **fiat** (`-fiat-moonpay`) — because each ultimately
+   moves USDt from the user (spend / supply / lock / sell). It imports no sibling
+   SDK: each provider is a narrow interface the integrator implements over the real
+   package (the same boundary the WDK wallet + checkout use). `toSettlementLeg`
+   reads the USDt obligation (`to` + `value`) out of any protocol action, tolerant
+   of each module's field names; `buildGaslessSettlement` turns it into EIP-3009
+   typed data to sign (ReceiveWithAuthorization by default, so only the protocol/
+   relayer can pull); `composeSettlementPlan` pairs the action with its gasless
+   leg; and `settlementToRelayRequest` hands the signed leg straight to
+   `relayAuthorization`. Unit-tested (6 tests across the field-shape reader, the
+   builder, and an end-to-end swap→sign→relay path) and demonstrated by the
+   runnable, dependency-free `examples/compose-gasless-settlement.mjs`.
 
 ---
 
